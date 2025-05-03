@@ -3,10 +3,14 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import Icon from "@/components/ui/icon";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const Index = () => {
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
+
   const featuredProcessors = [
     {
       id: 1,
@@ -14,6 +18,7 @@ const Index = () => {
       price: 42900,
       location: "Москва",
       image: "https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&q=80&w=1000",
+      brand: "intel",
     },
     {
       id: 2,
@@ -21,6 +26,7 @@ const Index = () => {
       price: 39500,
       location: "Санкт-Петербург",
       image: "https://images.unsplash.com/photo-1555618254-65f4ff782f4e?auto=format&fit=crop&q=80&w=1000",
+      brand: "amd",
     },
     {
       id: 3,
@@ -28,6 +34,7 @@ const Index = () => {
       price: 36700,
       location: "Екатеринбург",
       image: "https://images.unsplash.com/photo-1562408590-e32931084e23?auto=format&fit=crop&q=80&w=1000",
+      brand: "intel",
     },
     {
       id: 4,
@@ -35,8 +42,45 @@ const Index = () => {
       price: 35900,
       location: "Казань",
       image: "https://images.unsplash.com/photo-1563770557317-3be88689c9ab?auto=format&fit=crop&q=80&w=1000",
+      brand: "amd",
+    },
+    {
+      id: 5,
+      title: "Intel Core i5-13600K",
+      price: 28500,
+      location: "Новосибирск",
+      image: "https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&q=80&w=1000",
+      brand: "intel",
+    },
+    {
+      id: 6,
+      title: "AMD Ryzen 5 7600X",
+      price: 24900,
+      location: "Москва",
+      image: "https://images.unsplash.com/photo-1555618254-65f4ff782f4e?auto=format&fit=crop&q=80&w=1000",
+      brand: "amd",
+    },
+    {
+      id: 7,
+      title: "Intel Core i9-14900K",
+      price: 48900,
+      location: "Санкт-Петербург",
+      image: "https://images.unsplash.com/photo-1562408590-e32931084e23?auto=format&fit=crop&q=80&w=1000",
+      brand: "intel",
+    },
+    {
+      id: 8,
+      title: "AMD Ryzen 9 7950X",
+      price: 45500,
+      location: "Екатеринбург",
+      image: "https://images.unsplash.com/photo-1563770557317-3be88689c9ab?auto=format&fit=crop&q=80&w=1000",
+      brand: "amd",
     },
   ];
+
+  const filteredProcessors = selectedCategory === "all" 
+    ? featuredProcessors 
+    : featuredProcessors.filter(proc => proc.brand === selectedCategory);
 
   return (
     <div className="min-h-screen flex flex-col bg-[#FFFAFA]">
@@ -65,7 +109,7 @@ const Index = () => {
       {/* Основной контент */}
       <main className="flex-grow container mx-auto px-4 py-8">
         {/* Баннер */}
-        <div className="mb-10 text-center">
+        <div className="mb-8 text-center">
           <h1 className="text-4xl font-bold mb-2">Binary Market</h1>
           <p className="text-gray-600 mb-6">Здесь представлены готовые характеристики текущей серии флагманов.</p>
           
@@ -82,56 +126,60 @@ const Index = () => {
           </div>
         </div>
 
-        {/* Фильтры */}
-        <div className="mb-8 bg-[#E3E7F7] p-4 rounded-lg">
-          <div className="flex flex-wrap gap-4 items-center">
-            <div className="font-medium">Фильтры:</div>
-            <select className="bg-white rounded p-2 border border-gray-300">
-              <option>Все производители</option>
-              <option>Intel</option>
-              <option>AMD</option>
-            </select>
-            <select className="bg-white rounded p-2 border border-gray-300">
-              <option>Цена</option>
-              <option>До 20 000 ₽</option>
-              <option>20 000 - 40 000 ₽</option>
-              <option>Свыше 40 000 ₽</option>
-            </select>
-            <select className="bg-white rounded p-2 border border-gray-300">
-              <option>Количество ядер</option>
-              <option>4 ядра</option>
-              <option>6 ядер</option>
-              <option>8 ядер</option>
-              <option>Более 8 ядер</option>
-            </select>
-            <Button variant="outline" className="bg-white">
-              <Icon name="SlidersHorizontal" className="mr-2 h-4 w-4" />
-              Еще фильтры
-            </Button>
-          </div>
+        {/* Упрощенные фильтры */}
+        <div className="mb-6 flex justify-center gap-4">
+          <Button 
+            variant={selectedCategory === "all" ? "default" : "outline"}
+            className={selectedCategory === "all" ? "bg-[#E3E7F7] text-black" : "bg-white"}
+            onClick={() => setSelectedCategory("all")}
+          >
+            Все процессоры
+          </Button>
+          <Button 
+            variant={selectedCategory === "intel" ? "default" : "outline"}
+            className={selectedCategory === "intel" ? "bg-[#E3E7F7] text-black" : "bg-white"}
+            onClick={() => setSelectedCategory("intel")}
+          >
+            Intel
+          </Button>
+          <Button 
+            variant={selectedCategory === "amd" ? "default" : "outline"}
+            className={selectedCategory === "amd" ? "bg-[#E3E7F7] text-black" : "bg-white"}
+            onClick={() => setSelectedCategory("amd")}
+          >
+            AMD
+          </Button>
         </div>
 
-        {/* Список процессоров */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-          {featuredProcessors.map((processor) => (
-            <Card key={processor.id} className="overflow-hidden hover:shadow-md transition-shadow duration-200">
-              <div className="aspect-video relative overflow-hidden bg-gray-100">
-                <img 
-                  src={processor.image} 
-                  alt={processor.title} 
-                  className="object-cover w-full h-full"
-                />
-              </div>
-              <div className="p-4">
-                <div className="font-bold text-lg mb-1">{processor.title}</div>
-                <div className="text-xl font-semibold mb-2">{processor.price.toLocaleString()} ₽</div>
-                <div className="text-gray-500 text-sm flex items-center">
-                  <Icon name="MapPin" className="h-4 w-4 mr-1" />
-                  {processor.location}
-                </div>
-              </div>
-            </Card>
-          ))}
+        {/* Пролистывающийся каталог процессоров */}
+        <div className="mb-10 bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+          <div className="p-4 bg-[#E3E7F7] border-b border-gray-200">
+            <h2 className="text-xl font-semibold">Каталог процессоров</h2>
+          </div>
+          
+          <ScrollArea className="h-[500px] p-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {filteredProcessors.map((processor) => (
+                <Card key={processor.id} className="overflow-hidden hover:shadow-md transition-shadow duration-200">
+                  <div className="aspect-video relative overflow-hidden bg-gray-100">
+                    <img 
+                      src={processor.image} 
+                      alt={processor.title} 
+                      className="object-cover w-full h-full"
+                    />
+                  </div>
+                  <div className="p-4">
+                    <div className="font-bold text-lg mb-1">{processor.title}</div>
+                    <div className="text-xl font-semibold mb-2">{processor.price.toLocaleString()} ₽</div>
+                    <div className="text-gray-500 text-sm flex items-center">
+                      <Icon name="MapPin" className="h-4 w-4 mr-1" />
+                      {processor.location}
+                    </div>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          </ScrollArea>
         </div>
 
         {/* Рекламный блок сообщества */}
