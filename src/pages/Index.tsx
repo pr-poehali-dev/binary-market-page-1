@@ -19,6 +19,7 @@ const Index = () => {
       location: "Москва",
       image: "https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&q=80&w=1000",
       brand: "intel",
+      date: "Сегодня 10:45",
     },
     {
       id: 2,
@@ -27,6 +28,7 @@ const Index = () => {
       location: "Санкт-Петербург",
       image: "https://images.unsplash.com/photo-1555618254-65f4ff782f4e?auto=format&fit=crop&q=80&w=1000",
       brand: "amd",
+      date: "Сегодня 09:15",
     },
     {
       id: 3,
@@ -35,6 +37,7 @@ const Index = () => {
       location: "Екатеринбург",
       image: "https://images.unsplash.com/photo-1562408590-e32931084e23?auto=format&fit=crop&q=80&w=1000",
       brand: "intel",
+      date: "Вчера 19:30",
     },
     {
       id: 4,
@@ -43,6 +46,7 @@ const Index = () => {
       location: "Казань",
       image: "https://images.unsplash.com/photo-1563770557317-3be88689c9ab?auto=format&fit=crop&q=80&w=1000",
       brand: "amd",
+      date: "Вчера 18:22",
     },
     {
       id: 5,
@@ -51,6 +55,7 @@ const Index = () => {
       location: "Новосибирск",
       image: "https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&q=80&w=1000",
       brand: "intel",
+      date: "Вчера 15:40",
     },
     {
       id: 6,
@@ -59,6 +64,7 @@ const Index = () => {
       location: "Москва",
       image: "https://images.unsplash.com/photo-1555618254-65f4ff782f4e?auto=format&fit=crop&q=80&w=1000",
       brand: "amd",
+      date: "Вчера 14:07",
     },
     {
       id: 7,
@@ -67,6 +73,7 @@ const Index = () => {
       location: "Санкт-Петербург",
       image: "https://images.unsplash.com/photo-1562408590-e32931084e23?auto=format&fit=crop&q=80&w=1000",
       brand: "intel",
+      date: "2 мая 11:30",
     },
     {
       id: 8,
@@ -75,6 +82,7 @@ const Index = () => {
       location: "Екатеринбург",
       image: "https://images.unsplash.com/photo-1563770557317-3be88689c9ab?auto=format&fit=crop&q=80&w=1000",
       brand: "amd",
+      date: "1 мая 16:45",
     },
   ];
 
@@ -89,12 +97,12 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
-              <Link to="/" className="font-bold text-xl">Binary Market</Link>
+              <Link to="/" className="font-bold text-xl">Binary Epoch</Link>
             </div>
             <nav className="hidden md:flex space-x-8">
               <Link to="/" className="font-medium hover:text-gray-600">Главная страница</Link>
               <Link to="/processors" className="font-medium hover:text-gray-600">Процессоры</Link>
-              <Link to="/comparison" className="font-medium hover:text-gray-600">Сравнения</Link>
+              <Link to="/comparison" className="font-medium hover:text-gray-600">Сравнение</Link>
               <Link to="/news" className="font-medium hover:text-gray-600">Новости</Link>
             </nav>
             <div className="flex items-center">
@@ -109,12 +117,14 @@ const Index = () => {
       {/* Основной контент */}
       <main className="flex-grow container mx-auto px-4 py-8">
         {/* Баннер */}
-        <div className="mb-8 text-center">
+        <div className="mb-6 text-center">
           <h1 className="text-4xl font-bold mb-2">Binary Market</h1>
           <p className="text-gray-600 mb-6">Здесь представлены готовые характеристики текущей серии флагманов.</p>
-          
-          {/* Поисковая строка */}
-          <div className="max-w-2xl mx-auto flex gap-2">
+        </div>
+        
+        {/* Поиск и размещение объявления */}
+        <div className="flex flex-col md:flex-row gap-4 mb-6">
+          <div className="flex-grow flex gap-2">
             <Input 
               placeholder="Поиск процессоров..." 
               className="bg-white border-gray-300"
@@ -124,62 +134,126 @@ const Index = () => {
               Найти
             </Button>
           </div>
-        </div>
-
-        {/* Упрощенные фильтры */}
-        <div className="mb-6 flex justify-center gap-4">
-          <Button 
-            variant={selectedCategory === "all" ? "default" : "outline"}
-            className={selectedCategory === "all" ? "bg-[#E3E7F7] text-black" : "bg-white"}
-            onClick={() => setSelectedCategory("all")}
-          >
-            Все процессоры
-          </Button>
-          <Button 
-            variant={selectedCategory === "intel" ? "default" : "outline"}
-            className={selectedCategory === "intel" ? "bg-[#E3E7F7] text-black" : "bg-white"}
-            onClick={() => setSelectedCategory("intel")}
-          >
-            Intel
-          </Button>
-          <Button 
-            variant={selectedCategory === "amd" ? "default" : "outline"}
-            className={selectedCategory === "amd" ? "bg-[#E3E7F7] text-black" : "bg-white"}
-            onClick={() => setSelectedCategory("amd")}
-          >
-            AMD
+          <Button className="bg-blue-600 hover:bg-blue-700 text-white">
+            <Icon name="Plus" className="mr-2 h-4 w-4" />
+            Разместить объявление
           </Button>
         </div>
 
-        {/* Пролистывающийся каталог процессоров */}
-        <div className="mb-10 bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-          <div className="p-4 bg-[#E3E7F7] border-b border-gray-200">
-            <h2 className="text-xl font-semibold">Каталог процессоров</h2>
-          </div>
-          
-          <ScrollArea className="h-[500px] p-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {filteredProcessors.map((processor) => (
-                <Card key={processor.id} className="overflow-hidden hover:shadow-md transition-shadow duration-200">
-                  <div className="aspect-video relative overflow-hidden bg-gray-100">
-                    <img 
-                      src={processor.image} 
-                      alt={processor.title} 
-                      className="object-cover w-full h-full"
-                    />
-                  </div>
-                  <div className="p-4">
-                    <div className="font-bold text-lg mb-1">{processor.title}</div>
-                    <div className="text-xl font-semibold mb-2">{processor.price.toLocaleString()} ₽</div>
-                    <div className="text-gray-500 text-sm flex items-center">
-                      <Icon name="MapPin" className="h-4 w-4 mr-1" />
-                      {processor.location}
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-10">
+          {/* Левая колонка с фильтрами */}
+          <div className="lg:col-span-1">
+            <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden sticky top-20">
+              <div className="p-4 bg-[#E3E7F7] border-b border-gray-200">
+                <h2 className="font-semibold">Фильтры</h2>
+              </div>
+              <div className="p-4 space-y-4">
+                <div>
+                  <h3 className="font-medium mb-2">Производитель</h3>
+                  <div className="space-y-2">
+                    <div className="flex items-center">
+                      <input type="checkbox" id="all" className="mr-2" checked={selectedCategory === "all"} 
+                        onChange={() => setSelectedCategory("all")} />
+                      <label htmlFor="all">Все</label>
+                    </div>
+                    <div className="flex items-center">
+                      <input type="checkbox" id="intel" className="mr-2" checked={selectedCategory === "intel"} 
+                        onChange={() => setSelectedCategory("intel")} />
+                      <label htmlFor="intel">Intel</label>
+                    </div>
+                    <div className="flex items-center">
+                      <input type="checkbox" id="amd" className="mr-2" checked={selectedCategory === "amd"} 
+                        onChange={() => setSelectedCategory("amd")} />
+                      <label htmlFor="amd">AMD</label>
                     </div>
                   </div>
-                </Card>
-              ))}
+                </div>
+                
+                <Separator />
+                
+                <div>
+                  <h3 className="font-medium mb-2">Цена, ₽</h3>
+                  <div className="flex gap-2">
+                    <Input placeholder="от" className="bg-white border-gray-300" />
+                    <Input placeholder="до" className="bg-white border-gray-300" />
+                  </div>
+                </div>
+                
+                <Separator />
+                
+                <div>
+                  <h3 className="font-medium mb-2">Состояние</h3>
+                  <div className="space-y-2">
+                    <div className="flex items-center">
+                      <input type="checkbox" id="new" className="mr-2" />
+                      <label htmlFor="new">Новый</label>
+                    </div>
+                    <div className="flex items-center">
+                      <input type="checkbox" id="used" className="mr-2" />
+                      <label htmlFor="used">Б/у</label>
+                    </div>
+                  </div>
+                </div>
+                
+                <Button className="w-full bg-[#E3E7F7] text-black hover:bg-[#d0d4e4]">
+                  Показать результаты
+                </Button>
+              </div>
             </div>
-          </ScrollArea>
+          </div>
+          
+          {/* Правая колонка с объявлениями */}
+          <div className="lg:col-span-3">
+            <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+              <div className="p-4 bg-[#E3E7F7] border-b border-gray-200 flex justify-between items-center">
+                <h2 className="font-semibold">Объявления</h2>
+                <div className="flex items-center text-sm">
+                  <span className="mr-2">Сортировка:</span>
+                  <select className="bg-white rounded p-1 border border-gray-300 text-sm">
+                    <option>По дате</option>
+                    <option>Сначала дешевле</option>
+                    <option>Сначала дороже</option>
+                  </select>
+                </div>
+              </div>
+              
+              <div className="p-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {filteredProcessors.map((processor) => (
+                    <Card key={processor.id} className="overflow-hidden hover:shadow-md transition-shadow duration-200 flex flex-col h-full">
+                      <div className="aspect-video relative overflow-hidden bg-gray-100">
+                        <img 
+                          src={processor.image} 
+                          alt={processor.title} 
+                          className="object-cover w-full h-full"
+                        />
+                        <Button variant="outline" size="icon" className="absolute top-2 right-2 bg-white rounded-full w-8 h-8 p-0">
+                          <Icon name="Heart" className="h-4 w-4" />
+                        </Button>
+                      </div>
+                      <div className="p-4 flex-grow flex flex-col">
+                        <div className="font-bold text-lg mb-1 hover:text-blue-600">{processor.title}</div>
+                        <div className="text-xl font-semibold mb-2">{processor.price.toLocaleString()} ₽</div>
+                        <div className="mt-auto pt-2 text-gray-500 text-sm flex items-center justify-between">
+                          <div className="flex items-center">
+                            <Icon name="MapPin" className="h-4 w-4 mr-1" />
+                            {processor.location}
+                          </div>
+                          <div>{processor.date}</div>
+                        </div>
+                      </div>
+                    </Card>
+                  ))}
+                </div>
+                
+                <div className="mt-6 flex justify-center">
+                  <Button variant="outline" className="bg-white">
+                    Показать еще
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Рекламный блок сообщества */}
@@ -199,6 +273,38 @@ const Index = () => {
                 alt="Сообщество процессоров" 
                 className="rounded-lg max-w-[250px]"
               />
+            </div>
+          </div>
+        </div>
+
+        {/* Инструкции по использованию сервиса */}
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden mb-10">
+          <div className="p-4 bg-[#E3E7F7] border-b border-gray-200">
+            <h2 className="font-semibold">Как пользоваться Binary Market</h2>
+          </div>
+          <div className="p-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="flex flex-col items-center text-center">
+                <div className="bg-[#E3E7F7] rounded-full w-16 h-16 flex items-center justify-center mb-4">
+                  <Icon name="Search" className="h-8 w-8 text-gray-700" />
+                </div>
+                <h3 className="font-semibold mb-2">1. Найдите процессор</h3>
+                <p className="text-sm text-gray-600">Используйте фильтры для поиска нужной модели</p>
+              </div>
+              <div className="flex flex-col items-center text-center">
+                <div className="bg-[#E3E7F7] rounded-full w-16 h-16 flex items-center justify-center mb-4">
+                  <Icon name="MessageCircle" className="h-8 w-8 text-gray-700" />
+                </div>
+                <h3 className="font-semibold mb-2">2. Свяжитесь с продавцом</h3>
+                <p className="text-sm text-gray-600">Обсудите детали и договоритесь о сделке</p>
+              </div>
+              <div className="flex flex-col items-center text-center">
+                <div className="bg-[#E3E7F7] rounded-full w-16 h-16 flex items-center justify-center mb-4">
+                  <Icon name="CheckCircle" className="h-8 w-8 text-gray-700" />
+                </div>
+                <h3 className="font-semibold mb-2">3. Завершите сделку</h3>
+                <p className="text-sm text-gray-600">Оплатите и получите ваш процессор</p>
+              </div>
             </div>
           </div>
         </div>
